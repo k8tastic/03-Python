@@ -17,7 +17,6 @@ print ("----------------------------")
 
 totalvotes = int
 
-
 with open(csvpath, "r") as csvfile:
 
 # Initialize csv.writer and skip first row
@@ -55,12 +54,16 @@ with open(csvpath, "r") as csvfile:
         
     print ("----------------------------") 
     
-    winner = 0
-    for key, value in candidatelist:
-        if candidatelist[key] > winner:
-            winner = candidatelist
+    #Find the winner of the election
+    highvote = 0
+    winner = str
+    for key in candidatelist:
+        if candidatelist[key] > highvote:
+            highvote = candidatelist[key]
+            winner = key
             
-    print (winner)
+    print (f"Winner: {winner}")
+    print ("----------------------------") 
        
         # Set variable for output file
 #output_file = os.path.join("web_final.csv")
