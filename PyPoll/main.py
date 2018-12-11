@@ -40,9 +40,7 @@ with open(csvpath, "r") as csvfile:
             vote = candidatelist.get(row[2]) + 1
             candidatelist[row[2]] = vote
     
-    #Print all results      
-    print("Election Results")
-    print ("----------------------------")    
+    #Print all results       
     print (f"Total Votes: {totalvotes}")
     print ("----------------------------")
 
@@ -64,18 +62,20 @@ with open(csvpath, "r") as csvfile:
             
     print (f"Winner: {winner}")
     print ("----------------------------") 
-       
-        # Set variable for output file
-#output_file = os.path.join("web_final.csv")
-#output_file = "C:\\Users\\C00979\\DataViz-Lesson-Plans\\01-Lesson-Plans\\03-Python\\2\\Activities\\11-Stu_UdemyZip\\web_final.csv"
-
-#  Open the output file
-#with open(output_file, "w", newline="") as datafile:
-#    writer = csv.writer(datafile)
-
-    # Write the header row
-#    writer.writerow(["Title", "Course Price", "Subscribers", "Reviews Left",
- #                     "Percent of Reviews", "Length of Course"])
-
-    # Write in zipped rows
-#    writer.writerows(cleaned_csv)
+    
+#Export results into a new text file
+f= open("election_results.txt","w+")
+f= open("election_results.txt","a+")
+f.write("Election Results"  + "\n") 
+f.write("----------------------------"  + "\n")     
+f.write(f"Total Votes: {totalvotes}"  + "\n")
+f.write("----------------------------"  + "\n")
+for key in candidatelist:
+    percent = candidatelist[key]/totalvotes*100
+    percent = round(percent, 3)
+    f.write(f"{key}: {percent}% ({candidatelist[key]})"  + "\n")
+f.write("----------------------------"  + "\n")
+f.write(f"Winner: {winner}" + "\n")
+f.write("----------------------------") 
+f.close()   
+ 
