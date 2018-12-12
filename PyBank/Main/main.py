@@ -19,22 +19,30 @@ csvpath = os.path.join("..", "Resources", "budget_data.csv")
 print ("Financial Analysis")
 print ("----------------------------")
 
-Profit_Losses = []
+netprofit = 0
+totalmonths = 0
 monthlychange = []
+
 
 with open(csvpath, "r") as csvfile:
 
-# Initialize csv.writer
+# Initialize csv.writer and skip first row
     csvreader = csv.reader(csvfile,delimiter = ",")
     next(csvreader, None)
      
     #count the months: since there is one row per month, we can count the rows
     #calc net profit or loss: sum all rows in the "Profit/Losses" column  
-    row_count = len(row[1])
-    total = sum(int(row[1]) for row in csvreader)
+    #file = csvreader
+    #data = list(file)
+    #totalmonths = len(data)
+    #totalmonths = sum(1 for row in csvreader)
     
-    print (f"Total Months: {row_count}")
-    print (f"Total: {total}")
+    for row in csvreader:
+        totalmonths = totalmonths + 1
+        netprofit = netprofit + int(row[1])
+    
+    print (f"Total Months: {totalmonths}")
+    print (f"Total: ${netprofit}")
     
     #calc average month to month change: first calc change for each month, then take average  
 

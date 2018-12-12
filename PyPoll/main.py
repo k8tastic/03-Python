@@ -25,7 +25,7 @@ with open(csvpath, "r") as csvfile:
      
     #count the votes: since there is one row per vote, we can count the rows
     #calc net profit or loss: sum all rows in the "Profit/Losses" column  
-
+    
     data = list(csvreader)
     totalvotes = len(data)
    
