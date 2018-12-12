@@ -7,7 +7,7 @@ This is a temporary script file.
 
 ## PyBank
 
-#The dataset is composed of two columns: `Date` and `Profit/Losses`. 
+#Dependencies
 
 import os
 import csv
@@ -22,15 +22,7 @@ print ("----------------------------")
 totalmonths = 0
 totalrev = []
 monthlychange = []
-totalchange = 0
-changemonths = 0
-averagechange = 0
-maxchange = 0
-minchange = 0
-maxdate = 0
-mindate = 0
 date =[]
-
 
 with open(csvpath, "r") as csvfile:
 
@@ -38,18 +30,14 @@ with open(csvpath, "r") as csvfile:
     csvreader = csv.reader(csvfile,delimiter = ",")
     next(csvreader, None)
      
-    #count the months: since there is one row per month, we can count the rows
-    #calc net profit or loss: sum all rows in the "Profit/Losses" column  
-    #file = csvreader
-    #data = list(file)
-    #totalmonths = len(data)
-    #totalmonths = sum(1 for row in csvreader)
+    #count the months and calc net profit or loss 
     
     for row in csvreader:
         totalmonths = totalmonths + 1
         totalrev.append(float(row[1]))
         date.append(row[0])
-        
+    
+    #calculate the ave monthly change and max, min    
     for i in range(1,totalmonths):
         monthlychange.append(totalrev[i] - totalrev[i-1])
     
@@ -69,3 +57,15 @@ with open(csvpath, "r") as csvfile:
     
     print (f"Greatest Increase in Profits: {maxdate} (${maxchange})")
     print (f"Greatest Decrease in Profits: {mindate} (${minchange})")
+
+#Export results into a new text file
+f= open("budget_data.txt","w+")
+f= open("budget_data.txt","a+")
+f.write("Financial Analysis"  + "\n") 
+f.write("----------------------------"  + "\n")     
+f.write(f"Total Months: {totalmonths}"  + "\n")
+f.write(f"Total: ${total}"  + "\n")
+f.write(f"Average Change: ${averagechange}" + "\n")
+f.write(f"Greatest Increase in Profits: {maxdate} (${maxchange})" + "\n")
+f.write(f"Greatest Decrease in Profits: {mindate} (${minchange})") 
+f.close()   
